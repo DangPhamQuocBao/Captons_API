@@ -7,7 +7,6 @@ function fetchProductList() {
   })
     .then(function (res) {
       productList = res.data;
-      sortProductList();
       renderDSSP(productList);
       tatLoading();
     })
@@ -148,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tatLoading();
       });
   }
+  renderDSSP(productList);
 
   fetchProductList();
 });

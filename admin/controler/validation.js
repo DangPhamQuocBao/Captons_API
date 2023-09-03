@@ -1,63 +1,75 @@
-const getEle = (id) => document.getElementById(id);
+function validateForm() {
+  var name = document.getElementById("name").value.trim();
+  var price = document.getElementById("price").value.trim();
+  var screen = document.getElementById("screen").value.trim();
+  var backCam = document.getElementById("backCam").value.trim();
+  var frontCam = document.getElementById("frontCam").value.trim();
+  var img = document.getElementById("img").value.trim();
+  var desc = document.getElementById("desc").value.trim();
+  var type = document.getElementById("type").value.trim();
 
-export class Validate {
-  numRegex = /^[0-9]+$/;
-
-  messageSwitch = (isFalse, idTB, message = '') => {
-    if (isFalse == false) {
-      getEle(idTB).style.display = 'block';
-      getEle(idTB).innerHTML = message;
-      return false;
-    } else if (isFalse == true) {
-      getEle(idTB).innerHTML = '&#8205'; //invisible (to keep distance between forms unchanged)
-      return true;
-    }
-  };
-
-  isNotEmpty(id, idTB) {
-    let text = getEle(id).value.trim();
-    return text == ''
-      ? this.messageSwitch(false, idTB, `(*)This field can't be empty`)
-      : this.messageSwitch(true, idTB);
+  if (name === "") {
+    document.getElementById("tbname").innerText = "Tên không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbname").innerText = "";
   }
 
-  isSelected(id, idTB) {
-    let theSelect = getEle(id);
-    return theSelect.selectedIndex == 0
-      ? this.messageSwitch(false, idTB, '(*)Please select one option')
-      : this.messageSwitch(true, idTB);
+  if (price === "") {
+    document.getElementById("tbprice").innerText = "Giá không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbprice").innerText = "";
   }
 
-  isMatch(id, idTB, format) {
-    let text = getEle(id).value;
-    return !text.match(format)
-      ? this.messageSwitch(false, idTB, '(*)Price must be a number')
-      : this.messageSwitch(true, idTB);
+  if (screen === "") {
+    document.getElementById("tbscreen").innerText =
+      "Màn hình không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbscreen").innerText = "";
   }
 
-  isNotExist(phoneList, isUpdate = false) {
-    if (isUpdate) return this.messageSwitch(true, 'tbname');
-    for (let i = 0; i < phoneList.length; i++) {
-      if (phoneList[i].name == getEle('name').value) {
-        return this.messageSwitch(false, 'tbname', '(*)This phone already exist');
-      }
-    }
-    return this.messageSwitch(true, 'tbname');
+  if (backCam === "") {
+    document.getElementById("tbbackCam").innerText =
+      "Camera sau không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbbackCam").innerText = "";
   }
 
-  isValid(phoneList, isUpdate) {
-    let valid = true;
-    valid &= this.isNotEmpty('name', 'tbname') && this.isNotExist(phoneList, isUpdate);
-    valid &=
-      this.isNotEmpty('price', 'tbprice') &&
-      this.isMatch('price', 'tbprice', this.numRegex);
-
-    valid &= this.isNotEmpty('screen', 'tbscreen');
-    valid &= this.isNotEmpty('backCam', 'tbbackCam');
-    valid &= this.isNotEmpty('frontCam', 'tbfrontCam');
-    valid &= this.isNotEmpty('img', 'tbimg');
-    valid &= this.isNotEmpty('desc', 'tbdesc');
-    valid &= this.isSelected('type', 'tbtype');
-    return valid;
+  if (frontCam === "") {
+    document.getElementById("tbfrontCam").innerText =
+      "Camera trước không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbfrontCam").innerText = "";
   }
+
+  if (img === "") {
+    document.getElementById("tbimg").innerText =
+      "Link hình ảnh không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbimg").innerText = "";
+  }
+
+  if (desc === "") {
+    document.getElementById("tbdesc").innerText = "Mô tả không được để trống.";
+    return false;
+  } else {
+    document.getElementById("tbdesc").innerText = "";
+  }
+
+  if (type === "" || type === "Select brand") {
+    document.getElementById("tbtype").innerText = "Hãy chọn thương hiệu.";
+    return false;
+  } else {
+    document.getElementById("tbtype").innerText = "";
+  }
+
+  return true;
 }
+document.getElementById("formPhone").onsubmit = function () {
+  return validateForm();
+};

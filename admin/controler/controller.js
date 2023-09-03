@@ -6,7 +6,7 @@ function renderDSSP(productList) {
                     <td>${products.id}</td>
                     <td>${products.name}</td>
                     <td>${products.price}</td>
-                    <td>${products.img}</td>
+                    <td><img src=${products.img} alt=""></img></td>
                     <td>${products.desc}</td>
                     <td>
                         <button class="btn btn-danger" onclick ="xoaSP(${products.id})">Xóa</button>
@@ -42,4 +42,14 @@ function layThongTinTuForm() {
     desc: desc,
     type: type,
   };
+}
+function showThongTinLenForm(data) {
+  document.getElementById("name").value = data.name;
+  document.getElementById("price").value = data.price;
+  document.getElementById("screen").value = data.screen;
+  document.getElementById("backCam").value = data.backCam;
+  document.getElementById("frontCam").value = data.frontCam;
+  document.getElementById("img").value = data.img;
+  document.getElementById("desc").value = data.desc;
+  document.getElementById("type").value = data.type;
 }
